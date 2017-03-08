@@ -56,8 +56,6 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
 	var _redux = __webpack_require__(19);
 
 	var _index = __webpack_require__(6);
@@ -75,7 +73,6 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	var reX = new _index2.default();
 
-	console.log(typeof reducer === 'undefined' ? 'undefined' : _typeof(reducer));
 	var store = (0, _redux.createStore)(reducer, {}, (0, _redux.applyMiddleware)(reX.start));
 
 	console.log(store.getState());

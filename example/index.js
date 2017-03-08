@@ -7,7 +7,7 @@ function reducer(state = {}, action) {
 
 const reX = new ReduxRecover();
 
-console.log(typeof reducer);
+
 const store = createStore(reducer, {}, applyMiddleware(reX.start));
 
 console.log(store.getState());
