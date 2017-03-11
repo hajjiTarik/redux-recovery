@@ -1,2 +1,2 @@
-# ![alt tag](http://imgur.com/qya2Uub)
+# ![alt tag](http://i.imgur.com/qya2Uub.png)
 # redux-recover
