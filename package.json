@@ -1,5 +1,5 @@
 {
-  "name": "redux-recover",
+  "name": "redux-recovery",
   "version": "0.0.1",
   "main": "./dist/bundle.js",
   "devDependencies": {
@@ -65,5 +65,10 @@
     "url": "https://github.com/hajjiTarik/redux-recover/issues"
   },
   "homepage": "https://github.com/hajjiTarik/redux-recover#readme",
-  "description": ""
+  "description": "",
+  "keywords": [
+    "javascript",
+    "redux",
+    "react"
+  ]
 }
