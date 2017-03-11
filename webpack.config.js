@@ -16,7 +16,7 @@ var config = {
     ]
   },
   output: {
-    library: 'redux-recover',
+    library: 'redux-recovery',
     libraryTarget: 'umd'
   },
   plugins: [
