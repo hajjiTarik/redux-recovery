@@ -43,7 +43,7 @@
     "webpack": "^1.9.6"
   },
   "scripts": {
-    "build": "cross-env BABEL_ENV=commonjs NODE_ENV=development webpack src/index.js dist/redux-recover.js",
+    "build": "cross-env BABEL_ENV=commonjs NODE_ENV=development webpack src/index.js dist/redux-recovery.js",
     "lint:js": "eslint ./src/*.js",
     "lint:js:fix": "eslint --fix ./src/*.js",
     "lint:js:report": "eslint --format junit --no-color --output-file reports/eslint-report.xml ."
@@ -62,9 +62,9 @@
     "url": "git+https://github.com/hajjiTarik/redux-recover.git"
   },
   "bugs": {
-    "url": "https://github.com/hajjiTarik/redux-recover/issues"
+    "url": "https://github.com/hajjiTarik/redux-recovery/issues"
   },
-  "homepage": "https://github.com/hajjiTarik/redux-recover#readme",
+  "homepage": "https://github.com/hajjiTarik/redux-recovery#readme",
   "description": "",
   "keywords": [
     "javascript",
