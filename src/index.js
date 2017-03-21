@@ -27,8 +27,7 @@ export default class extends Storage {
     const actionArray = this.getStorage('REDUX_RECOVER_ACTION') || [];
 
     if (actionArray.length == this.nbSavedActions) {
-      actionArray.shift();
-      actionArray.push(action);
+      actionArray.shift(action);
     } else {
       actionArray.push(action);
     }
