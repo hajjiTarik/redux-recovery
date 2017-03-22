@@ -9,5 +9,28 @@ To install the stable version:
 
 ```js
 npm install --save redux-recovery
-````
+```
 This assumes you are using npm as your package manager.
+
+
+### Usage
+
+```js
+import createStore from 'redux';
+import ReduxRecovery from 'redux-recovery';
+
+const reduxRecovery = new ReduxRecovery({
+    recordAction: true,
+    nbSavedActions: 10
+});
+const middlewares = [reduxRecovery.start];
+const store = createStore(reducer, {...initialState}, 
+  applyMiddleware(...middlewares),
+));
+```
+
+
+### API
+
+`Force state persistence`: store.dispatch({ type: 'PERSIST_STORE' });
+`Retrieve the persistence of the state`: reduxRecovery.getPersistState();
