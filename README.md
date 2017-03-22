@@ -33,4 +33,5 @@ const store = createStore(reducer, {...initialState},
 ### API
 
 `Force state persistence`: store.dispatch({ type: 'PERSIST_STORE' });
+
 `Retrieve the persistence of the state`: reduxRecovery.getPersistState();
