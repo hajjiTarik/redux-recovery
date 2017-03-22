@@ -32,6 +32,12 @@ const store = createStore(reducer, {...initialState},
 
 ### API
 
-`Force state persistence`: ```js store.dispatch({ type: 'PERSIST_STORE' });
+`Force state persistence`: 
+```js 
+store.dispatch({ type: 'PERSIST_STORE' });
 ```
-`Retrieve the persistence of the state`: reduxRecovery.getPersistState();
+
+`Retrieve the persistence of the state`:
+```js  
+reduxRecovery.getPersistState();
+```
