@@ -575,7 +575,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.persistAction = exports.start = exports.persistWithConditions = undefined;
+	exports.persistAction = exports.start = exports.persistWithConditions = exports.persistor = undefined;
 
 	var _Storage = __webpack_require__(9);
 
@@ -589,19 +589,19 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	exports.default = persistor = function persistor() {
+	var persistor = exports.persistor = function persistor() {
 	  var recordAction = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
+	  var key = arguments[1];
 
 	  undefined.persistActionType = CONSTANTES.PERSIST_STORE;
-	  undefined.recordAction = config.recordAction;
-	  undefined.nbSavedActions = config.nbSavedActions;
-	  _Storage2.default.initLocalStorage();
+	  undefined.recordAction = recordAction;
+	  _Storage2.default.initLocalStorage(key);
 	};
 
 	var persistWithConditions = exports.persistWithConditions = function persistWithConditions(currentState, action) {
 	  if (!currentState) return;
 
-	  if (action.type == undefined.persistActionType) {
+	  if (action.type === undefined.persistActionType) {
 	    undefined.setStorage(currentState);
 	  }
 	};
@@ -624,7 +624,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  if (!action) return;
 	  var actionArray = undefined.getStorage('REDUX_RECOVER_ACTION') || [];
 
-	  if (actionArray.length == undefined.nbSavedActions) {
+	  if (actionArray.length === undefined.nbSavedActions) {
 	    actionArray.shift(action);
 	  } else {
 	    actionArray.push(action);

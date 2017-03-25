@@ -1,20 +1,19 @@
 import storage from './libs/Storage';
 import * as CONSTANTES from './constantes';
 
-export default persistor = (recordAction = true) => {
-    this.persistActionType = CONSTANTES.PERSIST_STORE;
-    this.recordAction = config.recordAction;
-    this.nbSavedActions = config.nbSavedActions;
-    storage.initLocalStorage();
-}
+export const persistor = (recordAction = true, key) => {
+  this.persistActionType = CONSTANTES.PERSIST_STORE;
+  this.recordAction = recordAction;
+  storage.initLocalStorage(key);
+};
 
 export const persistWithConditions = (currentState, action) => {
   if (!currentState) return;
 
-  if (action.type == this.persistActionType) {
+  if (action.type === this.persistActionType) {
     this.setStorage(currentState);
   }
-}
+};
 
 export const start = store => next => (action) => {
   const result = next(action);
@@ -26,14 +25,14 @@ export const start = store => next => (action) => {
   return result;
 };
 
-export const persistAction = action => {
+export const persistAction = (action) => {
   if (!action) return;
   const actionArray = this.getStorage('REDUX_RECOVER_ACTION') || [];
 
-  if (actionArray.length == this.nbSavedActions) {
+  if (actionArray.length === this.nbSavedActions) {
     actionArray.shift(action);
   } else {
     actionArray.push(action);
   }
   storage.setStorage('REDUX_RECOVER_ACTION', actionArray.reverse());
-}
+};

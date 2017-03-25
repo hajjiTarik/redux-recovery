@@ -3,7 +3,7 @@ class Storage {
     if (typeof (window) === 'undefined') return;
 
     this.storage = window.localStorage;
-    this.storeKey = "REDUX_RECOVER";
+    this.storeKey = 'REDUX_RECOVER';
     this.initLocalStorage();
   }
 
@@ -12,13 +12,13 @@ class Storage {
     const action = `${this.storeKey}_ACTION`;
 
     if (this.storage.getItem(store) ||
-        this.storage.getItem(action) ) return;
+      this.storage.getItem(action)) return;
 
     this.storage.setItem(store, null);
     this.storage.setItem(action, null);
   }
 
-  setStorage = (key = this.storeKey,  data) => {
+  setStorage = (key = this.storeKey, data) => {
     this.storage.setItem(key, JSON.stringify(data));
   }
 
