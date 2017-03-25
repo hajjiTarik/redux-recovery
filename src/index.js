@@ -36,3 +36,8 @@ export const persistAction = (action) => {
   }
   storage.setStorage('REDUX_RECOVER_ACTION', actionArray.reverse());
 };
+
+export const purge = () => new Promise((resolve, reject) => {
+  storage.clearStorage();
+  resolve();
+});
