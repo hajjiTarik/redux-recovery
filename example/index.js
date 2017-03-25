@@ -1,4 +1,5 @@
 import { createStore, applyMiddleware } from 'redux';
+import ReTrace from 'redux-trace';
 import ReduxRecover from '../src/index';
 import { composeWithDevTools } from 'redux-devtools-extension';
 
@@ -7,9 +8,9 @@ function reducer(state = {}, action) {
 }
 
 const reX = new ReduxRecover();
+const reTrace = new ReTrace();
 
 const store = createStore(reducer, {}, composeWithDevTools(
-  applyMiddleware(reX.start),
+  applyMiddleware(reTrace.start, reX.start),
 ));
-store.dispatch({type : 'start'});
 console.log(store.getState());

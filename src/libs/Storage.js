@@ -1,4 +1,4 @@
-export default class Storage {
+class Storage {
   constructor() {
     if (typeof (window) === 'undefined') return;
 
@@ -19,7 +19,6 @@ export default class Storage {
   }
 
   setStorage = (key = this.storeKey,  data) => {
-    console.log("key",key, "data",data);
     this.storage.setItem(key, JSON.stringify(data));
   }
 
@@ -32,3 +31,5 @@ export default class Storage {
     this.storage.removeItem(this.storeKey);
   }
 }
+
+export default new Storage();

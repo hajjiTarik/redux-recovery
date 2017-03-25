@@ -59,93 +59,78 @@ return /******/ (function(modules) { // webpackBootstrap
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
+	exports.persistAction = exports.start = exports.persistWithConditions = undefined;
 
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	var _Storage = __webpack_require__(2);
 
-	var _Storage2 = __webpack_require__(1);
+	var _Storage2 = _interopRequireDefault(_Storage);
 
-	var _Storage3 = _interopRequireDefault(_Storage2);
+	var _constantes = __webpack_require__(1);
+
+	var CONSTANTES = _interopRequireWildcard(_constantes);
+
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	exports.default = persistor = function persistor() {
+	  var recordAction = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
 
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	  undefined.persistActionType = CONSTANTES.PERSIST_STORE;
+	  undefined.recordAction = config.recordAction;
+	  undefined.nbSavedActions = config.nbSavedActions;
+	  _Storage2.default.initLocalStorage();
+	};
 
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	var persistWithConditions = exports.persistWithConditions = function persistWithConditions(currentState, action) {
+	  if (!currentState) return;
 
-	var _class = function (_Storage) {
-	  _inherits(_class, _Storage);
-
-	  function _class() {
-	    var config = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {
-	      recordAction: true,
-	      nbSavedActions: 2
-	    };
-
-	    _classCallCheck(this, _class);
-
-	    var _this = _possibleConstructorReturn(this, (_class.__proto__ || Object.getPrototypeOf(_class)).call(this));
-
-	    _this.start = function (store) {
-	      return function (next) {
-	        return function (action) {
-	          var result = next(action);
-	          var currentState = store.getState();
-	          _this.persistWithConditions(currentState, action);
-	          if (_this.recordAction) {
-	            _this.persistAction(action);
-	          }
-	          return result;
-	        };
-	      };
-	    };
-
-	    _this.persistAction = function (action) {
-	      if (!action) return;
-	      console.log("action", _this.getStorage('REDUX_RECOVER_ACTION'));
-	      var actionArray = _this.getStorage('REDUX_RECOVER_ACTION') || [];
-
-	      if (actionArray.length == _this.nbSavedActions) {
-	        actionArray.shift();
-	        actionArray.push(action);
-	      } else {
-	        actionArray.push(action);
-	      }
-
-	      _this.setStorage('REDUX_RECOVER_ACTION', actionArray.reverse());
-	    };
-
-	    _this.persistActionType = 'PERSIST_STORE';
-	    _this.recordAction = config.recordAction;
-	    _this.nbSavedActions = config.nbSavedActions;
-	    return _this;
+	  if (action.type == undefined.persistActionType) {
+	    undefined.setStorage(currentState);
 	  }
+	};
 
-	  _createClass(_class, [{
-	    key: 'persistWithConditions',
-	    value: function persistWithConditions(currentState, action) {
-	      var _this2 = this;
-
-	      if (!currentState) return;
-
-	      if (action.type == this.persistActionType) {
-	        this.setStorage(currentState);
+	var start = exports.start = function start(store) {
+	  return function (next) {
+	    return function (action) {
+	      var result = next(action);
+	      var currentState = store.getState();
+	      persistWithConditions(currentState, action);
+	      if (undefined.recordAction) {
+	        undefined.persistAction(action);
 	      }
+	      return result;
+	    };
+	  };
+	};
 
-	      window.onbeforeunload = function () {
-	        _this2.setStorage('REDUX_RECOVER_STORE', currentState);
-	      };
-	    }
-	  }]);
+	var persistAction = exports.persistAction = function persistAction(action) {
+	  if (!action) return;
+	  var actionArray = undefined.getStorage('REDUX_RECOVER_ACTION') || [];
 
-	  return _class;
-	}(_Storage3.default);
-
-	exports.default = _class;
+	  if (actionArray.length == undefined.nbSavedActions) {
+	    actionArray.shift(action);
+	  } else {
+	    actionArray.push(action);
+	  }
+	  _Storage2.default.setStorage('REDUX_RECOVER_ACTION', actionArray.reverse());
+	};
 
 /***/ },
 /* 1 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	var PERSIST_STORE = exports.PERSIST_STORE = 'PERSIST_STORE';
+	var PURGE_STORE = exports.PURGE_STORE = 'PURGE_STORE';
+	var ERROR_PERSING_STORE = exports.ERROR_PERSING_STORE = 'ERROR_PERSING_STORE';
+
+/***/ },
+/* 2 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -175,7 +160,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	    var key = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : _this.storeKey;
 	    var data = arguments[1];
 
-	    console.log("key", key, "data", data);
 	    _this.storage.setItem(key, JSON.stringify(data));
 	  };
 
@@ -197,7 +181,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  this.initLocalStorage();
 	};
 
-	exports.default = Storage;
+	exports.default = new Storage();
 
 /***/ }
 /******/ ])
