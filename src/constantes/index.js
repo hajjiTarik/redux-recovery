@@ -1,0 +1,3 @@
+export const PERSIST_STORE = 'PERSIST_STORE';
+export const PURGE_STORE = 'PURGE_STORE';
+export const ERROR_PERSING_STORE = 'ERROR_PERSING_STORE';
