@@ -39,6 +39,16 @@ store.dispatch({ type: 'PERSIST_STORE' });
 ```
 
 `Retrieve the persistence of the state`:
+```js
+reduxRecovery.getPersistState();
+```
+
+`Purge persisted store`:
+```js  
+reduxRecovery.getPersistState();
+```
+
+`rehydrate the store`:
 ```js  
 reduxRecovery.getPersistState();
 ```
