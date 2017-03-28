@@ -52,3 +52,7 @@ reduxRecovery.getPersistState();
 ```js  
 reduxRecovery.getPersistState();
 ```
+
+### Licence
+
+### MIT
