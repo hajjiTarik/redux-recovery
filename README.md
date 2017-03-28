@@ -1,5 +1,5 @@
 # ![alt tag](http://i.imgur.com/mVqUtca.png)
-can be used for persist rehydrate the redux store,
+can be used for persist rehydrate, purge the redux store,
 # WIP
 ![build status](https://travis-ci.org/hajjiTarik/redux-recovery.svg?branch=master)
 ### Why Redux-recovery
