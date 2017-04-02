@@ -29,11 +29,7 @@ export const persistAction = (action) => {
   if (!action) return;
   const actionArray = this.getStorage('REDUX_RECOVER_ACTION') || [];
 
-  if (actionArray.length === this.nbSavedActions) {
-    actionArray.shift(action);
-  } else {
-    actionArray.push(action);
-  }
+  actionArray = actionArray.length === this.nbSavedActions ? actionArray.shift(action) : action.push(action);
   storage.setStorage('REDUX_RECOVER_ACTION', actionArray.reverse());
 };
 
