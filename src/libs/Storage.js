@@ -18,8 +18,12 @@ class Storage {
     this.storage.setItem(action, null);
   }
 
-  setStorage = (key = this.storeKey, data) => {
-    this.storage.setItem(key, JSON.stringify(data));
+  setStorage = (key = this.storeKey, data) => new Promise(resolve, reject) => {
+    try {
+      resolve(this.storage.setItem(key, JSON.stringify(data)));
+    } catch(e) {
+      reject(e);
+    }
   }
 
   getStorage = (key = this.storeKey) => {
