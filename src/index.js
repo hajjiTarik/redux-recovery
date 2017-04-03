@@ -1,13 +1,13 @@
 import storage from './libs/Storage';
 import * as CONSTANTES from './constantes';
 
-export const persistor = (recordAction = true, key) => {
+const persistor = (recordAction = true, key) => {
   this.persistActionType = CONSTANTES.PERSIST_STORE;
   this.recordAction = recordAction;
   storage.initLocalStorage(key);
 };
 
-export const persistWithConditions = (currentState, action) => {
+const persistWithConditions = (currentState, action) => {
   if (!currentState) return;
 
   if (action.type === this.persistActionType) {
@@ -25,7 +25,7 @@ export const start = store => next => (action) => {
   return result;
 };
 
-export const persistAction = (action) => {
+const persistAction = (action) => {
   if (!action) return;
   const actionArray = this.getStorage('REDUX_RECOVER_ACTION') || [];
 
